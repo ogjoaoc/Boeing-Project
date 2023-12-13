@@ -1,0 +1,29 @@
+---
+title: "Trabalho Final de CE1"
+author: |
+  João Carlos Gonçalves,
+  Tomás Mello,
+  Eric,
+  Felipe
+date: "12 de dezembro, 2023"
+output:
+  pdf_document: default
+  html_document:
+    css: "./ava.css"
+    highlight: pygments
+    theme: cerulean
+    charset: "utf-8"
+---
+
+
+
+
+# Parte 1
+
+Inicio
+
+```{r message=FALSE, warning=FALSE}
+a <- 1+1
+a
+```
+
