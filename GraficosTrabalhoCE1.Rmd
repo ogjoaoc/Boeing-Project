@@ -3,12 +3,12 @@ title: "Alguns graficos de correlação"
 author: "Tomás Mello"
 date: "2023-12-12"
 output:
-  pdf_document: default
   html_document:
     css: ../ava.css
     highlight: pygments
     theme: cerulean
     charset: "utf-8"
+  pdf_document: default
 ---
 -Pontos para analisar, correlacoes com batida em relacao ao voo, trajetoria, velocidade, altura. Se quanto mais rapido estiver mais dano tem o aviao
 -Da para tirar conclusoes do que é cada parte do voo, em qual altura qual velocidade, etc
