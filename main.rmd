@@ -87,6 +87,7 @@ output:
 library(tidyverse)
 library(dplyr)
 library(ggplot2)
+library(knitr)
 def_strikes <- read.csv( "STRIKE_REPORTS.csv")
 ```
 
@@ -136,15 +137,19 @@ def_strikes <- def_strikes %>%
 
 \subsection{\LARGE Estados e quantidade de acidentes} 
 \label{sec:a1}
-
 ```{r, fig.width=10, echo = FALSE}
 #Estados com mais Impactos
+library(knitr)
+
+# Criando a tabela
 table_ESTADO <- def_strikes %>%
   group_by(STATE) %>%
   summarize(
     Voos = n()) %>%
   arrange(desc(Voos))
-print(table_ESTADO)
+
+# Formatando a tabela com kable
+kable(table_ESTADO, caption = "Tabela de Estados com número de acidentes", col.names = c("Estado", "Número de Acidentes"))
 ```
 
 \newpage
@@ -182,3 +187,38 @@ def_strikes %>%
 def_strikes %>%
   ggplot(aes(x= Nível_do_Dano)) + geom_bar() + labs(title="Contagem Dano", x="Severidade", y="Ocorrencias")
 ```
+
+```{r, fig.width=10, echo=FALSE}
+#Estados com mais Impactos
+table_ESTADO <- def_strikes %>%
+  group_by(STATE) %>%
+  summarize(
+    Voos = n()) %>%
+  arrange(desc(Voos))
+print(table_ESTADO)
+```
+
+```{r, echo = FALSE}
+acidentes_ordem_decresc <- sort(table_ESTADO$Voos, decreasing = TRUE)
+barplot(acidentes_ordem_decresc, names.arg = table_ESTADO$STATE, col = "skyblue", 
+        main = "Gráfico de acidentes nos estados dos EUA", xlab = "Total de Acidentes nos estados ", 
+        ylab = "Num. acidentes" ) 
+```
+
+
+```{r}
+# resumo aeroportos de origem dos acidentes
+aeroporto <- c(def_strikes$V8)
+contador <- table(aeroporto)
+print(contador)
+```
+
+
+```{r}
+# resumo anterior em ordem decrescente
+a <- sort(contador, decreasing = TRUE)
+print(a)
+```
+
+
+
