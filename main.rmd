@@ -83,7 +83,7 @@ output:
 
 - Carregar bibliotecas e ler a base de dados
 
-```{r, fig.width=12, message=FALSE}
+```{r, fig.width=12, message=FALSE, echo = FALSE}
 library(tidyverse)
 library(dplyr)
 library(ggplot2)
@@ -91,7 +91,7 @@ def_strikes <- read.csv( "STRIKE_REPORTS.csv")
 ```
 
 - Tradução e Transformação de valores 
-```{r, fig.width=10}
+```{r, fig.width=10, echo = FALSE}
 #Mudar as siglas da classe de aeronave para os nomes inteiros"
 def_strikes <- def_strikes %>%
    mutate(Tipo_de_Aeronave = case_when(
@@ -137,7 +137,7 @@ def_strikes <- def_strikes %>%
 \subsection{\LARGE Estados e quantidade de acidentes} 
 \label{sec:a1}
 
-```{r, fig.width=10, echo= TRUE}
+```{r, fig.width=10, echo = FALSE}
 #Estados com mais Impactos
 table_ESTADO <- def_strikes %>%
   group_by(STATE) %>%
@@ -153,7 +153,7 @@ print(table_ESTADO)
 \label{sec:a1}
 
 
-```{r, fig.width=10, echo= TRUE}
+```{r, fig.width=10, echo = FALSE}
 #Aeroportos com mais voos que tiveram impactos
 table_aeroportos <- def_strikes %>%
   group_by(AIRPORT) %>%
@@ -177,7 +177,7 @@ def_strikes %>%
 \subsection{\LARGE Severidade dos impactos causados nas aeronaves} 
 \label{sec:a1}
 
-```{r, results='hide'}
+```{r, results='hide', echo = FALSE}
 #Contagem da severidade dos impactos
 def_strikes %>%
   ggplot(aes(x= Nível_do_Dano)) + geom_bar() + labs(title="Contagem Dano", x="Severidade", y="Ocorrencias")
