@@ -56,26 +56,34 @@ output:
 
 \newpage
 
-\subsection{Variáveis} 
+\section{\Huge Variáveis} 
 \label{sec:Variáveis}
 
 \vspace{1.5cm}
 \large
-\begin{itemize}
-    \item INCIDENT_DATE: Data dos incidentes.
-    \item AIRPORT: Aeroportos.
-    \item AIRCRAFT: Informações da aeronave.
-    \item SPECIES: Espécies envolvidas no acidente.
-    \item LOCATION: Localização geográfica do acidente.
-    \item PHASE_OF_FLIGHT: Fase do voo em que o acidente ocorreu. 
-    
-\end{itemize}
+
+- **INCIDENT_DATE:**Data dos incidentes.
+- **AIRPORT:** Aeroportos.
+- **AIRCRAFT:** Informações da aeronave.
+- **SPECIES:** Espécies envolvidas no acidente.
+- **LOCATION:** Localização geográfica do acidente.
+- **PHASE_OF_FLIGHT:** Fase do voo em que o acidente ocorreu.
 
 
-\small
+\vspace{1.5cm}
+
+\newpage
+
+\section{\Huge Análise} 
+\label{sec:Análise}
+
+\vspace{1cm}
+
+\large
+
 - Carregar bibliotecas e ler a base de dados
 
-```{r, fig.width=10, echo=FALSE}
+```{r, fig.width=12, message=FALSE}
 library(tidyverse)
 library(dplyr)
 library(ggplot2)
@@ -83,7 +91,7 @@ def_strikes <- read.csv( "STRIKE_REPORTS.csv")
 ```
 
 - Tradução e Transformação de valores 
-```{r, fig.width=10, echo=FALSE}
+```{r, fig.width=10}
 #Mudar as siglas da classe de aeronave para os nomes inteiros"
 def_strikes <- def_strikes %>%
    mutate(Tipo_de_Aeronave = case_when(
@@ -124,3 +132,11 @@ def_strikes <- def_strikes %>%
     
 ```
 
+\subsection{\LARGE Estados e quantidade de acidentes} 
+\label{sec:a1}
+
+```{r, fig.width=10, echo= TRUE}
+aero <- c(def_strikes$V12)
+contagem <- table(aero)
+print(contagem) 
+```
