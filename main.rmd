@@ -16,7 +16,7 @@ output:
 \begin{center}
     \Large Integrantes:
     
-    João Carlos, Tomás Mello, Eric, Felipe Bragança
+    João Carlos - 232009511, Tomás Mello - 221003369, Eric - 221003402, Felipe Bragança - 
 \end{center}
 
 \vspace{1.5cm}
@@ -122,7 +122,7 @@ def_strikes <- def_strikes %>%
     DAMAGE_LEVEL== ""| DAMAGE_LEVEL== "NA" ~ "Desconhecido",
     DAMAGE_LEVEL== "N" ~ "Sem Dano"))
 
-#Mudando as dummys de massa para a massa
+##Mudando as dummys de massa para a massa
 def_strikes <- def_strikes %>%
    mutate(Massa_Aeronave = case_when(
     AC_MASS == 1 ~ "2.250=<",
@@ -131,7 +131,23 @@ def_strikes <- def_strikes %>%
     AC_MASS == 4 ~ "27.001-272.000",
     AC_MASS == 5 ~ ">272.000",
     AC_MASS == "NA"|AC_MASS == ""  ~ "Desconhecido"))
-#Transformar as variaveis de custo em numericas em vez de texto (numeric em vez de string)
+
+#etapas de voo
+def_strikes <- def_strikes %>%
+   mutate(EtapadoVoo = case_when(
+     PHASE_OF_FLIGHT == "" ~ "Desconhecido",
+     PHASE_OF_FLIGHT == "Approach" ~ "Aproximação",
+     PHASE_OF_FLIGHT == "Arrival" ~ "Chegada",
+     PHASE_OF_FLIGHT == "Climb" ~ "Subida",
+     PHASE_OF_FLIGHT == "Departure" ~ "Decolagem",
+     PHASE_OF_FLIGHT == "Descent" ~ "Descida",
+     PHASE_OF_FLIGHT == "En Route" ~ "Na rota",
+     PHASE_OF_FLIGHT == "Local" ~ "Local",
+     PHASE_OF_FLIGHT == "Parked" ~ "Parado",
+     PHASE_OF_FLIGHT == "Landing Roll" ~ "Pousando na Pista",
+     PHASE_OF_FLIGHT == "Take-off Run " ~ "Corrida Decolagem",
+     PHASE_OF_FLIGHT == "Taxi" ~ "Taxi"))
+
 def_strikes$NCOST_REPAIRS <- as.numeric(gsub(",", "", def_strikes$COST_REPAIRS))    
 def_strikes$NCOST_OTHER <- as.numeric(gsub(",", "", def_strikes$COST_OTHER))  
 ```
@@ -268,8 +284,10 @@ def_strikes %>%
   scale_x_continuous(breaks = 1:12) + theme_minimal()
 ```
 
+\large Nos meses de julho, agosto, há um aumento no número de ocorrências, podendo estar correlacionado com o começo do verão e periódo de férias escolares nos EUA, consequentemente com mais voos e migração de volta das aves que foram para o sul no inverno.
+
 \subsection{\LARGE Severidade dos impactos causados nas aeronaves} 
-\label{sec:a1}
+\label{sec:a7}
 
 \vspace{1.5cm}
 
@@ -278,38 +296,76 @@ def_strikes %>%
 def_strikes %>%
   ggplot(aes(x= Nível_do_Dano)) + geom_bar() + labs(title="Contagem Dano", x="Severidade", y="Ocorrencias")
 ```
+\vspace{1cm}
 
-```{r, fig.width=10, echo=FALSE}
-#Estados com mais Impactos
-table_ESTADO <- def_strikes %>%
-  group_by(STATE) %>%
-  summarize(
-    Voos = n()) %>%
-  arrange(desc(Voos))
-print(table_ESTADO)
+\large A grande maioria das ocorrências de acidentes não causam dano a aeronaves. Poucas ocorrências causam dano considerável, sendo que nenhuma ocorrência causou destruição.
+
+\newpage
+
+\subsection{\LARGE Acidentes por ano} 
+\label{sec:a8}
+
+\vspace{1.5cm}
+```{r, fig.width =10, echo = FALSE}
+#Anos e batidas de aeronave, fazer a sem os unknow/desconhecidos tambem mais para frente
+def_strikes %>%
+  filter(Tipo_de_Aeronave!= "Desconhecido") %>%
+  ggplot(aes(x= INCIDENT_YEAR, fill = Tipo_de_Aeronave)) + geom_bar() + labs(title="Strikes por Ano", x="Anos", y="Ocorrencias", fill="Tipos de Aeronave")
 ```
+\large É possível notar um aumento do número de ocorrências ao longo dos anos, havendo uma baixa significativa em 2020, devido a diminuição de voos por conta da pandemia do corona vírus.
+
+\vspace{1.5cm}
+
+```{r, fig.width =10, echo = FALSE}
+#Número de ocorrências e tipo de aeronave
+def_strikes %>%
+  filter(Tipo_de_Aeronave != "Desconhecido") %>%
+  ggplot(aes(x= Tipo_de_Aeronave)) + geom_bar() + labs(title="Tipos de aeronaves e número de ocorrências ", x="Tipo", y="Ocorrencias")
+```
+\large Tirando os valores desconhecidos, podemos ver que a grande maioria das ocorrências acontecem com aviões, e em segundo lugar, com helicóptero.
+
+\vspace{1.5cm}
+
+\newpage
+\subsection{\LARGE Etapas do voo em que ocorrem acidentes} 
+\label{sec:a9}
+
+```{r, fig.width =10, echo = FALSE}
+#QUal etapa do Voo tem mais batidas, com isso percebemos que quanto mais baixo mais bate, o que é logico, porque as avez nao voam super alto
+def_strikes %>%
+  ggplot(aes(x = factor(EtapadoVoo, levels = unique(EtapadoVoo)))) +
+  geom_bar(fill = "steelblue") +
+  labs(title = "Contagem por Etapa", x = "Etapa", y = "Ocorrências") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+                                                      
+```
+\large A grande maioria dos acidentes acontecem na fase de Approach, seguidos de Landing Roll e Take-off Run. São fases que estão mais perto do solo, colaborando com os dados apresentados anteriormente que a maioria dos acidentes são em alturas menores, perto do solo.
+
+\vspace{1.5cm}
+
+\newpage
+
+\subsection{\LARGE Reparo da aeronave por fatores do acidente} 
+\label{sec:a10}
 
 ```{r, echo = FALSE}
-acidentes_ordem_decresc <- sort(table_ESTADO$Voos, decreasing = TRUE)
-barplot(acidentes_ordem_decresc, names.arg = table_ESTADO$STATE, col = "skyblue", 
-        main = "Gráfico de acidentes nos estados dos EUA", xlab = "Total de Acidentes nos estados ", 
-        ylab = "Num. acidentes" ) 
+#Boxplot custos de reparo por dano e tamanho do passaro
+def_strikes %>%
+  ggplot(aes(x=Nível_do_Dano, y=NCOST_REPAIRS)) +  geom_boxplot(outlier.color = "red", outlier.size = 1, outlier.fill="red") + facet_grid(. ~ SIZE ) + labs(title = "Custo de Reparos por Tamanho do Passáro Atingido", y="Custos de Reparos em Dólares", x = "Nível do Dano") +  coord_cartesian(ylim = c(0,1000000))  +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
 ```
-
-
-```{r}
-# resumo aeroportos de origem dos acidentes
-aeroporto <- c(def_strikes$V8)
-contador <- table(aeroporto)
-print(contador)
+\vspace{1.5cm}
+```{r, fig.height=4, fig.width=17, echo = FALSE}
+#Altura em cada fase de voo"
+def_strikes %>%
+  ggplot(aes(x=EtapadoVoo, y=HEIGHT, fill=EtapadoVoo)) + geom_boxplot(outlier.color = "red", outlier.size = 2, outlier.fill="red") + labs(title = "Altura em cada Etapa do Voo", y="Altura", x = "Fase de Voo") 
 ```
-
-
-```{r}
-# resumo anterior em ordem decrescente
-a <- sort(contador, decreasing = TRUE)
-print(a)
+\large Através dos Box plots, conseguimos observar que a maior parte das ocorrências são em alturas perto do solo, devido ao fato que as aves não voam em níveis muito altos. 
+\vspace{1.5cm}
+```{r, fig.height=4, fig.width=17, echo = FALSE}
+#Boxplot da velocidade em cada etapa do Voo
+def_strikes %>%
+  ggplot(aes(x=EtapadoVoo , y=SPEED, fill=EtapadoVoo)) + geom_boxplot(outlier.color = "red", outlier.size = 2, outlier.fill="red") + labs(title = "Velocidade em cada Etapa do Voo", y="Velocidade", fill="Fase do Voo")
 ```
-
-
-
+\large A grande maioria dos acidentes ocorrem em velocidades menores que 400 milhas/h.
+\vspace{1.5cm}
