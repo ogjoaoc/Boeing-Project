@@ -8,7 +8,7 @@ output:
 
 
 \begin{center}
-    \Huge Análise de Acidentes com animais selvagens envolvendo aeronaves 1990-2023
+    \Huge Análise de acidentes com animais selvagens envolvendo aeronaves (1990-2023)
 \end{center}
 
 \vspace{1.5cm}
@@ -16,7 +16,7 @@ output:
 \begin{center}
     \Large Integrantes:
     
-    João Carlos Gonçalves, Tomás Mello, Eric, Felipe
+    João Carlos, Tomás Mello, Eric, Felipe Bragança
 \end{center}
 
 \vspace{1.5cm}
@@ -45,11 +45,11 @@ output:
 \section{\Huge Objetivos}
 \label{sec:Objetivos}
 
-\Large    Objetivos
+\Large
 
-
-
-
+- Aplicar os conhecimentos lecionados da disciplina de CE1.
+- Ilustrar as diferentes implicações e interpretações da database escolhida.
+- Caracterizar por meio de descrições visuais os dados da database escolhida.
 
 
 
@@ -132,11 +132,53 @@ def_strikes <- def_strikes %>%
     
 ```
 
+\vspace{2cm}
+
 \subsection{\LARGE Estados e quantidade de acidentes} 
 \label{sec:a1}
 
 ```{r, fig.width=10, echo= TRUE}
-aero <- c(def_strikes$V12)
-contagem <- table(aero)
-print(contagem) 
+#Estados com mais Impactos
+table_ESTADO <- def_strikes %>%
+  group_by(STATE) %>%
+  summarize(
+    Voos = n()) %>%
+  arrange(desc(Voos))
+print(table_ESTADO)
+```
+
+\newpage
+
+\subsection{\LARGE Aeroportos por quantidades de acidentes} 
+\label{sec:a1}
+
+
+```{r, fig.width=10, echo= TRUE}
+#Aeroportos com mais voos que tiveram impactos
+table_aeroportos <- def_strikes %>%
+  group_by(AIRPORT) %>%
+  summarize(
+    Voos = n()) %>%
+  arrange(desc(Voos))
+print(table_aeroportos)
+```
+
+\subsection{\LARGE Meses do ano com maior ocorrência de impactos} 
+\label{sec:a1}
+
+
+```{r, fig.width=10, echo= FALSE, results='hide'}
+#Meses do ano com mais ocorrencias 
+def_strikes %>%
+  ggplot(aes(x= INCIDENT_MONTH)) + geom_bar() + labs(title="Meses com mais acidentes", x="Meses", y="Ocorrencias")  +
+  scale_x_continuous(breaks = 1:12) + theme_minimal()
+```
+
+\subsection{\LARGE Severidade dos impactos causados nas aeronaves} 
+\label{sec:a1}
+
+```{r, results='hide'}
+#Contagem da severidade dos impactos
+def_strikes %>%
+  ggplot(aes(x= Nível_do_Dano)) + geom_bar() + labs(title="Contagem Dano", x="Severidade", y="Ocorrencias")
 ```
