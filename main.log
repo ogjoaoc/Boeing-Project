@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.12.15)  16 DEC 2023 10:55
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.12.15)  16 DEC 2023 12:00
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -386,12 +386,6 @@ File: l3backend-pdftex.def 2023-11-09 L3 backend support: PDF output (pdfTeX)
 
 LaTeX Warning: Label `sec:a1' multiply defined.
 
-
-LaTeX Warning: Label `sec:a1' multiply defined.
-
-
-LaTeX Warning: Label `sec:a1' multiply defined.
-
 )
 \openout1 = `main.aux'.
 
@@ -458,7 +452,7 @@ Package hyperref Info: Link coloring OFF on input line 120.
 \@outlinefile=\write4
 \openout4 = `main.out'.
 
-<src/images/logo_unb.png, id=36, 85.31876pt x 43.66313pt>
+<src/images/logo_unb.png, id=44, 85.31876pt x 43.66313pt>
 File: src/images/logo_unb.png Graphic file (type png)
 <use src/images/logo_unb.png>
 Package pdftex.def Info: src/images/logo_unb.png  used on input line 137.
@@ -469,31 +463,121 @@ Package pdftex.def Info: src/images/logo_unb.png  used on input line 137.
 LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 172.
 (c:/Users/joao/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/ts1lmr.fd
 File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-) [2{c:/Users/joao/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}] [3] [4] [5]
-LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 315.
+) [2{c:/Users/joao/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}] [3]
+Overfull \hbox (8.94774pt too wide) in paragraph at lines 238--239
+[]\T1/lmr/m/n/12 Estado  
+ []
+
+
+Overfull \hbox (12.64998pt too wide) in paragraph at lines 240--241
+ []\T1/lmr/m/n/12 Impactos
+ []
+
+
+Overfull \hbox (12.85893pt too wide) in paragraph at lines 250--251
+ []\T1/lmr/m/n/12 Fatalidades
+ []
+
+[4]
+Overfull \hbox (14.39793pt too wide) in paragraph at lines 294--295
+ []\T1/lmr/m/n/12 Impactos 
+ []
+
+
+Overfull \hbox (16.28198pt too wide) in paragraph at lines 304--305
+ []\T1/lmr/m/n/12 Fatalidades 
+ []
+
+
+Overfull \hbox (1.16957pt too wide) in paragraph at lines 310--310
+ []|\T1/lmr/m/n/12 173.044827| 
+ []
+
+
+Overfull \hbox (15.3982pt too wide) in paragraph at lines 311--311
+[]|\T1/lmr/m/n/12 SOUTHWEST 
+ []
+
+
+Overfull \hbox (5.10622pt too wide) in paragraph at lines 313--313
+[]|\T1/lmr/m/n/12 AMERICAN 
+ []
+
+[5]
+Overfull \hbox (13.88205pt too wide) in paragraph at lines 359--360
+ []\T1/lmr/m/n/12 Impactos 
+ []
+
+
+Overfull \hbox (15.60223pt too wide) in paragraph at lines 369--370
+ []\T1/lmr/m/n/12 Fatalidades 
+ []
+
+
+Overfull \hbox (8.40811pt too wide) in paragraph at lines 378--378
+[]|\T1/lmr/m/n/12 CRJ100/200|  
+ []
+
+
+Overfull \hbox (13.88205pt too wide) in paragraph at lines 398--399
+ []\T1/lmr/m/n/12 Impactos 
+ []
+
+
+Overfull \hbox (15.60223pt too wide) in paragraph at lines 408--409
+ []\T1/lmr/m/n/12 Fatalidades 
+ []
+
+
+Overfull \hbox (6.27321pt too wide) in paragraph at lines 414--414
+[]|\T1/lmr/m/n/12 SIKORSKY 
+ []
+
+[6]
+Overfull \hbox (15.15051pt too wide) in paragraph at lines 459--460
+ []\T1/lmr/m/n/12 Impactos 
+ []
+
+
+Overfull \hbox (17.27734pt too wide) in paragraph at lines 469--470
+ []\T1/lmr/m/n/12 Fatalidades 
+ []
+
+
+Overfull \hbox (15.4297pt too wide) in paragraph at lines 499--500
+ []\T1/lmr/m/n/12 Impactos 
+ []
+
+
+Overfull \hbox (17.59296pt too wide) in paragraph at lines 509--510
+ []\T1/lmr/m/n/12 Fatalidades 
+ []
+
+<main_files/figure-latex/unnamed-chunk-7-1.pdf, id=81, 722.7pt x 325.215pt>
+File: main_files/figure-latex/unnamed-chunk-7-1.pdf Graphic file (type pdf)
+<use main_files/figure-latex/unnamed-chunk-7-1.pdf>
+Package pdftex.def Info: main_files/figure-latex/unnamed-chunk-7-1.pdf  used on input line 541.
+(pdftex.def)             Requested size: 469.76045pt x 211.3922pt.
+[7]
+<main_files/figure-latex/unnamed-chunk-8-1.pdf, id=89, 469.755pt x 325.215pt>
+File: main_files/figure-latex/unnamed-chunk-8-1.pdf Graphic file (type pdf)
+<use main_files/figure-latex/unnamed-chunk-8-1.pdf>
+Package pdftex.def Info: main_files/figure-latex/unnamed-chunk-8-1.pdf  used on input line 548.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+[8 <./main_files/figure-latex/unnamed-chunk-7-1.pdf>]
+LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 550.
 (c:/Users/joao/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-<main_files/figure-latex/unnamed-chunk-5-1.pdf, id=66, 722.7pt x 325.215pt>
-File: main_files/figure-latex/unnamed-chunk-5-1.pdf Graphic file (type pdf)
-<use main_files/figure-latex/unnamed-chunk-5-1.pdf>
-Package pdftex.def Info: main_files/figure-latex/unnamed-chunk-5-1.pdf  used on input line 335.
-(pdftex.def)             Requested size: 469.76045pt x 211.3922pt.
-<main_files/figure-latex/unnamed-chunk-6-1.pdf, id=67, 469.755pt x 325.215pt>
-File: main_files/figure-latex/unnamed-chunk-6-1.pdf Graphic file (type pdf)
-<use main_files/figure-latex/unnamed-chunk-6-1.pdf>
-Package pdftex.def Info: main_files/figure-latex/unnamed-chunk-6-1.pdf  used on input line 340.
+<main_files/figure-latex/unnamed-chunk-10-1.pdf, id=99, 469.755pt x 325.215pt>
+File: main_files/figure-latex/unnamed-chunk-10-1.pdf Graphic file (type pdf)
+<use main_files/figure-latex/unnamed-chunk-10-1.pdf>
+Package pdftex.def Info: main_files/figure-latex/unnamed-chunk-10-1.pdf  used on input line 567.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-[6 <./main_files/figure-latex/unnamed-chunk-5-1.pdf>]
-<main_files/figure-latex/unnamed-chunk-8-1.pdf, id=78, 469.755pt x 325.215pt>
-File: main_files/figure-latex/unnamed-chunk-8-1.pdf Graphic file (type pdf)
-<use main_files/figure-latex/unnamed-chunk-8-1.pdf>
-Package pdftex.def Info: main_files/figure-latex/unnamed-chunk-8-1.pdf  used on input line 359.
-(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-[7 <./main_files/figure-latex/unnamed-chunk-6-1.pdf>]
+[9 <./main_files/figure-latex/unnamed-chunk-8-1.pdf>]
 LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <12> not available
-(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 364.
-[8 <./main_files/figure-latex/unnamed-chunk-8-1.pdf>] (./main.aux)
+(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 572.
+[10 <./main_files/figure-latex/unnamed-chunk-10-1.pdf>] (./main.aux)
  ***********
 LaTeX2e <2023-11-01>
 L3 programming layer <2023-12-11>
@@ -502,21 +586,21 @@ L3 programming layer <2023-12-11>
 LaTeX Warning: There were multiply-defined labels.
 
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: C7CC6FEE81F970E299195DC8706F91E2;1457.
+(rerunfilecheck)             Checksum: F4375662E9AE6075B8AA1DB7DC089E3C;1805.
  ) 
 Here is how much of TeX's memory you used:
- 11527 strings out of 476134
- 178889 string characters out of 5793395
- 1937460 words of memory out of 5000000
- 33408 multiletter control sequences out of 15000+600000
+ 11549 strings out of 476134
+ 179107 string characters out of 5793395
+ 1955460 words of memory out of 5000000
+ 33421 multiletter control sequences out of 15000+600000
  584532 words of font info for 50 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 75i,6n,79p,367b,557s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,7n,79p,367b,477s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/Users/joao/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb><c:/Users/joao/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.pfb><c:/Users/joao/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb><c:/Users/joao/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr17.pfb><c:/Users/joao/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtk10.pfb><c:/Users/joao/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt12.pfb><c:/Users/joao/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtti10.pfb>
-Output written on main.pdf (8 pages, 208011 bytes).
+Output written on main.pdf (10 pages, 216193 bytes).
 PDF statistics:
- 143 PDF objects out of 1000 (max. 8388607)
- 108 compressed objects within 2 object streams
- 18 named destinations out of 1000 (max. 500000)
- 85 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 166 PDF objects out of 1000 (max. 8388607)
+ 129 compressed objects within 2 object streams
+ 27 named destinations out of 1000 (max. 500000)
+ 101 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -62,7 +62,7 @@ output:
 \vspace{1.5cm}
 \large
 
-- **INCIDENT_DATE:**Data dos incidentes.
+- **INCIDENT_DATE:** Data dos incidentes.
 - **AIRPORT:** Aeroportos.
 - **AIRCRAFT:** Informações da aeronave.
 - **SPECIES:** Espécies envolvidas no acidente.
@@ -82,6 +82,7 @@ output:
 \large
 
 - Carregar bibliotecas e ler a base de dados
+
 
 ```{r, fig.width=12, message=FALSE, echo = FALSE}
 library(tidyverse)
@@ -130,46 +131,134 @@ def_strikes <- def_strikes %>%
     AC_MASS == 4 ~ "27.001-272.000",
     AC_MASS == 5 ~ ">272.000",
     AC_MASS == "NA"|AC_MASS == ""  ~ "Desconhecido"))
-    
+#Transformar as variaveis de custo em numericas em vez de texto (numeric em vez de string)
+def_strikes$NCOST_REPAIRS <- as.numeric(gsub(",", "", def_strikes$COST_REPAIRS))    
+def_strikes$NCOST_OTHER <- as.numeric(gsub(",", "", def_strikes$COST_OTHER))  
 ```
+
 
 \vspace{2cm}
 
-\subsection{\LARGE Estados e quantidade de acidentes} 
+\subsection{\LARGE Estados e quantidade de acidentes (head)} 
 \label{sec:a1}
-```{r, fig.width=10, echo = FALSE}
-#Estados com mais Impactos
-library(knitr)
 
-# Criando a tabela
+```{r, echo = FALSE, fig.width=6}
+#Estados com mais Impactos
 table_ESTADO <- def_strikes %>%
   group_by(STATE) %>%
   summarize(
-    Voos = n()) %>%
-  arrange(desc(Voos))
+    Impactos = n(),
+    "Custo Médio de Reparos" = mean(NCOST_REPAIRS, na.rm = TRUE),
+    "Custo Médio Outros" = mean(NCOST_OTHER, na.rm = TRUE),
+    "Fora de Serviço" = mean(AOS, na.rm = TRUE),
+    "Pessoas Machucadas" = mean(NR_INJURIES, na.rm = TRUE),
+    "Fatalidades" = mean(NR_FATALITIES, na.rm = TRUE)
+  ) %>%
+  arrange(desc(Impactos))
 
-# Formatando a tabela com kable
-kable(table_ESTADO, caption = "Tabela de Estados com número de acidentes", col.names = c("Estado", "Número de Acidentes"))
+# Estilizando a tabela com kable
+knitr::kable(head(table_ESTADO, 15), format = "markdown", col.names = c("Estado", "Impactos", "Custo Médio de Reparos", "Custo Médio Outros", "Fora de Serviço", "Pessoas Machucadas", "Fatalidades"))
 ```
+
+\large É visível que, os cinco estados com maior número de acidentes, em ordem decrescente, são o Texas, Flórida, California, Nova York e Colorado. 
+\newpage
+
+\subsection{\LARGE Linhas aéreas com maior número de impactos} 
+\label{sec:a2}
+
+\vspace{1.5cm}
+
+```{r, fig.width=10, echo = FALSE}
+table_operadoresfiltrado <- def_strikes %>%
+  filter(OPERATOR != "UNKNOWN") %>%
+  group_by(OPERATOR) %>%
+  summarize(
+    Impactos = n(),
+    "Custo Médio de Reparos" = mean(NCOST_REPAIRS, na.rm = TRUE),
+    "Custo Médio Outros" = mean(NCOST_OTHER, na.rm = TRUE),
+    "Fora de Serviço" = mean(AOS, na.rm = TRUE),
+    "Pessoas Machucadas" = mean(NR_INJURIES, na.rm = TRUE),
+    "Fatalidades" = mean(NR_FATALITIES, na.rm = TRUE)
+    )  %>%
+  arrange(desc(Impactos))
+kable(head(table_operadoresfiltrado, 6), format = "markdown", col.names = c("Operador", "Impactos", "Custo Médio de Reparos", "Custo Médio Outros", "Fora de Serviço", "Pessoas Machucadas", "Fatalidades"), align = c("l", "c", "c", "c", "c", "c", "c"))
+```
+
+\vspace{1.5cm}
+
+\large Os operadores de voo nesse caso se referem as linhas aéreas, como a Azul, Latam e Gol no Brasil, e não os funcionários que supervisam e auxiliam nos voos. As linhas aéreas em termos mais gerais são separas em BUS=Business(Comercial), PVT=Private(Privada), GOV=Government(Governo), MIL=Military(Militar). Porém, a base de dados especifica um pouco melhor, listando as empresas responsáveis por essas linhas aéreas. Como é possível observar pela tabela dos operadores com mais casos de impactos com aves, percebemos que os custos para as empresas é considerável. Os custos de reparos, dos seus vários aviões somados estão nas casas das centenas de milhares de doláres. E isso sem considerar as outras despesas com as quais tem que arcar decorrentes dessas batidas, como cancelar voos, rembolsar passagens, pagar hoteis de emergência para seus clientes, etc. Então, apesar de não serem acidentes perigosos, como são vários e em aeronaves muito caras, as operadores lidam com custos massivos devido aos seus encontros com aves.
 
 \newpage
 
-\subsection{\LARGE Aeroportos por quantidades de acidentes} 
-\label{sec:a1}
+\subsection{\LARGE Tipos de aeronaves}
+\label{sec:a3}
 
+\vspace{1cm}
 
-```{r, fig.width=10, echo = FALSE}
-#Aeroportos com mais voos que tiveram impactos
-table_aeroportos <- def_strikes %>%
-  group_by(AIRPORT) %>%
+```{r, echo = FALSE, fig.width=8}
+#Tipos de avioes sem os desconhecidos que mais batem
+table_aircraftsFILTRADO <- def_strikes %>%
+  filter(AIRCRAFT != "UNKNOWN") %>%
+  group_by(AIRCRAFT)%>%
   summarize(
-    Voos = n()) %>%
-  arrange(desc(Voos))
-print(table_aeroportos)
+    Impactos = n(),
+    "Custo Médio de Reparos" = mean(NCOST_REPAIRS, na.rm = TRUE),
+    "Custo Médio Outros" = mean(NCOST_OTHER, na.rm = TRUE),
+    "Fora de Serviço" = mean(AOS, na.rm = TRUE),
+    "Pessoas Machucadas" = mean(NR_INJURIES, na.rm = TRUE),
+    "Fatalidades" = mean(NR_FATALITIES, na.rm = TRUE)
+    ) %>%
+  arrange(desc(Impactos))
+kable(head(table_aircraftsFILTRADO, 9), format = "markdown", col.names = c("Tipo de Aeronave", "Impactos", "Custo Médio de Reparos", "Custo Médio Outros", "Fora de Serviço", "Pessoas Machucadas", "Fatalidades"), align = c("l", "c", "c", "c", "c", "c", "c"))
+
+
+
+# Aviões mais fatais
+mortestable <- table_aircraftsFILTRADO %>%
+  arrange(desc(Fatalidades))
+
+# Estilizando a tabela de aviões mais fatais com kable
+library(knitr)
+kable(head(mortestable, 6), format = "markdown", col.names = c("Tipo de Aeronave", "Impactos", "Custo Médio de Reparos", "Custo Médio Outros", "Fora de Serviço", "Pessoas Machucadas", "Fatalidades"), align = c("l", "c", "c", "c", "c", "c", "c"))
 ```
 
+\vspace{0.5cm} 
+
+\large Seguindo a ideia de que as linhas aéreas comerciais são as que tem mais acidentes, devido a sua frequencia de voos e grande estoque de aviões, são esses modelos de aeronave comerciais as com maior recorrencia de acidentes. Todos os top aviões com maior quantidade de impactos com passáros, são aeronaves massivas usadas em voos comerciais, para transportar muitos passageiros. Entretanto, apesar desta regularidade nos "acidentes", individualmente as aeronaves em si não sofrem com grandes repercussões, exatamente por serem muito grandes e resistentes, e portanto atingir um ou mais passarinhos quase não tem consequencias. Assim, estes modelos de aviões não tem custos altos de reparos, nem precisam ficar muito tempo sem voar depois dos acidentes, além de que não tem nenhuma fatalidade e raríssimas vezes os passageiros se machucam. Em contrapartida, os modelos com maior número de mortes causadas pelos impactos com aves são aviões e helicópteros menores, com pouquissímos passageiros, e muito mais sucetíveis a danos quando acontecem estes encontros. Logo, as horas necessárias para a manutenção também são bem maiores.
+
+\newpage
+
+\subsection{\LARGE Tipos de aves} 
+\label{sec:a5}
+
+```{r, echo= FALSE}
+
+#passaros e seus efeitos
+table_passaros <- def_strikes %>%
+  group_by(SPECIES) %>%
+  summarize(
+    Impactos = n(),
+    "Custo Médio de Reparos" = mean(NCOST_REPAIRS, na.rm = TRUE),
+    "Custo Médio Outros" = mean(NCOST_OTHER, na.rm = TRUE),
+    "Fora de Serviço" = mean(AOS, na.rm = TRUE),
+    "Pessoas Machucadas" = mean(NR_INJURIES, na.rm = TRUE),
+    "Fatalidades" = mean(NR_FATALITIES, na.rm = TRUE)) %>%
+    arrange(desc(Impactos))
+kable(head(table_passaros, 6), format = "markdown", col.names = c("Espécie de Ave", "Impactos", "Custo Médio de Reparos", "Custo Médio Outros", "Fora de Serviço", "Pessoas Machucadas", "Fatalidades"), align = c("l", "c", "c", "c", "c", "c", "c"))
+
+#Podemos ordenar qualquer tabela para deixar a variavel que queremos em ordem decrescente. Para passaros, pensei em botar na ordem dos custos de reparo, ou de fatalidades/machucados dependendo de qual seja, ou por horas que a aeronave ficou sem funcionar
+
+avesfatais_table <- table_passaros %>%
+  arrange(desc(Fatalidades))
+
+kable(head(avesfatais_table, 6), format = "markdown", col.names = c("Espécie de Ave", "Impactos", "Custo Médio de Reparos", "Custo Médio Outros", "Fora de Serviço", "Pessoas Machucadas", "Fatalidades"), align = c("l", "c", "c", "c", "c", "c", "c"))
+```
+\vspace{0.5cm}
+
+\large As diferentes espécies de ave trazem um pensamento contrário ao das aeronaves: os passarinhos com maior registro de choques contra aviões são de pequena estatura, e por conseguinte, não são muito perigosos para as pessoas a bordo, e nem levam a altos custos de reparos. Em contrapartida, são as espécies maiores, como a famosa águia careca, pelicano americano, ou búteo-de-cauda-vermelha (red-tailed hawk). Quando uma aeronave se acidenta contra alguma dessas espécies, seus custos médios podem ir de $100.000,00-$300.000,00 dólares, e o risco é muito maior, com uma média de 8 mortes para o búteo-de-cauda-vermelha, e de 4 ou 3 para os demais.
+
 \subsection{\LARGE Meses do ano com maior ocorrência de impactos} 
-\label{sec:a1}
+\label{sec:a6}
 
 
 ```{r, fig.width=10, echo= FALSE, results='hide'}
@@ -181,6 +270,8 @@ def_strikes %>%
 
 \subsection{\LARGE Severidade dos impactos causados nas aeronaves} 
 \label{sec:a1}
+
+\vspace{1.5cm}
 
 ```{r, results='hide', echo = FALSE}
 #Contagem da severidade dos impactos
