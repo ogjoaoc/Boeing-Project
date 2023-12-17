@@ -16,7 +16,8 @@ output:
 \begin{center}
     \Large Integrantes:
     
-    João Carlos - 232009511, Tomás Mello - 221003369, Eric - 221003402, Felipe Bragança - 
+    João Carlos - 232009511, Tomás Mello - 221003369, Eric - 221003402, Felipe Bragança -
+    221003331 
 \end{center}
 
 \vspace{1.5cm}
@@ -286,12 +287,8 @@ def_strikes %>%
 
 \large Nos meses de julho, agosto, há um aumento no número de ocorrências, podendo estar correlacionado com o começo do verão e periódo de férias escolares nos EUA, consequentemente com mais voos e migração de volta das aves que foram para o sul no inverno.
 
-\subsection{\LARGE Severidade dos impactos causados nas aeronaves} 
-\label{sec:a7}
 
-\vspace{1.5cm}
-
-```{r, results='hide', echo = FALSE}
+```{r, results='hide', echo = FALSE, fig.width=8}
 #Contagem da severidade dos impactos
 def_strikes %>%
   ggplot(aes(x= Nível_do_Dano)) + geom_bar() + labs(title="Contagem Dano", x="Severidade", y="Ocorrencias")
@@ -369,3 +366,16 @@ def_strikes %>%
 ```
 \large A grande maioria dos acidentes ocorrem em velocidades menores que 400 milhas/h.
 \vspace{1.5cm}
+
+\newpage
+\subsection{\LARGE Conclusão}
+\vspace{1.5cm}
+A análise realizada sobre os incidentes de colisão entre aeronaves e animais selvagens revelou insights cruciais sobre esse cenário. Observou-se uma correlação entre a frequência desses acidentes e diversas variáveis, como tipos de aeronaves, espécies de aves, fases do voo, entre outros.
+
+Os estados como Texas, Flórida e Califórnia lideram em número de ocorrências, possivelmente devido à concentração de tráfego aéreo. As linhas aéreas comerciais enfrentam uma quantidade considerável de impactos, resultando em custos significativos para reparos de aeronaves, especialmente quando se trata de espécies maiores de aves, como águias e pelicanos.
+
+Embora os modelos de aviões maiores tenham mais colisões, não enfrentam repercussões graves devido à sua resistência. Por outro lado, aeronaves menores registram mais fatalidades, destacando a vulnerabilidade desses modelos.
+
+Os meses de julho e agosto apresentam mais ocorrências, possivelmente relacionados ao aumento de voos durante o verão nos EUA. As fases de aproximação, rolagem de pouso e decolagem são as mais propensas a acidentes, corroborando a tendência de incidentes em alturas menores.
+
+Os custos de reparo variam de acordo com a gravidade do dano, e a altura e velocidade das aeronaves no momento do incidente são fatores determinantes. Em suma, esses dados ilustram a complexidade dos impactos entre aves e aeronaves, evidenciando a necessidade de medidas preventivas e estratégias para mitigar tais acidentes.
